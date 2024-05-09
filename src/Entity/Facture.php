@@ -26,6 +26,9 @@ class Facture
     #[ORM\Column(length: 255)]
     private ?string $payment_mode = null;
 
+    #[ORM\OneToOne(mappedBy: 'facture', cascade: ['persist', 'remove'])]
+    private ?Reservation $reservation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -63,6 +66,28 @@ class Facture
     public function setPaymentMode(string $payment_mode): static
     {
         $this->payment_mode = $payment_mode;
+
+        return $this;
+    }
+
+    public function getReservation(): ?Reservation
+    {
+        return $this->reservation;
+    }
+
+    public function setReservation(?Reservation $reservation): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($reservation === null && $this->reservation !== null) {
+            $this->reservation->setFacture(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($reservation !== null && $reservation->getFacture() !== $this) {
+            $reservation->setFacture($this);
+        }
+
+        $this->reservation = $reservation;
 
         return $this;
     }

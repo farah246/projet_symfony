@@ -40,6 +40,9 @@ class Reservation
     #[ORM\Column]
     private ?bool $status = null;
 
+    #[ORM\OneToOne(inversedBy: 'reservation', cascade: ['persist', 'remove'])]
+    private ?Facture $facture = null;
+
     public function __construct()
     {
         $this->rooms = new ArrayCollection();
@@ -148,6 +151,18 @@ class Reservation
     public function setStatus(bool $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getFacture(): ?Facture
+    {
+        return $this->facture;
+    }
+
+    public function setFacture(?Facture $facture): static
+    {
+        $this->facture = $facture;
 
         return $this;
     }
