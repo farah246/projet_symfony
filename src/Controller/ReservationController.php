@@ -24,7 +24,7 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('app_reservation');
         }
         return $this->render('reservation/index.html.twig', [
-            'controller_name' => 'ReservationController',
+            'form' => $form->createView()
         ]);
     }
 }
