@@ -13,7 +13,7 @@ class ServiceFixtures extends Fixture
         // Sample data for services
         $serviceData = [
             [
-                'name' => 'Catering',
+                'name' => 'Catering Service',
                 'description' => 'Enjoy a complete catering service to enhance your stay. Our talented chefs prepare delicious and diverse dishes, catering to all tastes and dietary needs. Experience exceptional culinary delights without leaving the comfort of your room or our dining areas.',
                 'price' => 30.00,
             ],
@@ -27,6 +27,16 @@ class ServiceFixtures extends Fixture
                 'description' => 'Unwind and indulge in a refined selection of beverages at our stylish bar. From craft cocktails to exquisite wines, our bar offers a friendly and relaxing atmosphere for socializing or simply enjoying a moment of relaxation after a busy day.',
                 'price' => 20.0,
             ],
+            [
+                            'name' => 'Laundry',
+                            'description' => 'Simplify your stay with our professional laundry service.',
+                            'price' => 40.0,
+            ],
+            [
+                                        'name' => 'Hire Driver',
+                                        'description' => 'Explore the city and its surroundings conveniently with our private driver service.',
+                                        'price' => 50.0,
+                        ],
         ];
 
         foreach ($serviceData as $data) {

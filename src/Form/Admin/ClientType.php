@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Admin;
 
 use App\Entity\Client;
-use App\Entity\Reservation;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,17 +17,20 @@ class ClientType extends AbstractType
             ->add('lastname')
             ->add('email')
             ->add('phone')
-            ->add('payer', SubmitType::class, [
-                'label' => 'Pay and get bill',
-                'attr' => ['class' => 'btn btn-primary', 'formaction' => $options['generate-pdf']]
-            ]);
+            ->add('save', SubmitType::class);
+
+        /* ->add('reservation', EntityType::class, [
+             'class' => Reservation::class,
+'choice_label' => 'id',
+         ])
+         ->add( 'payer',SubmitType::class)*/
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Client::class,
-            'generate-pdf' => ''
         ]);
     }
 }

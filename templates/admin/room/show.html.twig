@@ -1,0 +1,75 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Hello AdminController!
+{% endblock %}
+
+{% block body %}
+<div
+        class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+
+        <ol>
+            <a href="">
+                <i class="fa fa-dashboard"></i>
+                Home</a>
+        </ol>
+    </section>
+
+                <div class="box-body">
+                    <h1>Show Room</h1>
+
+                    <h1>Room</h1>
+
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ room.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Reservation_Id</th>
+                            <td>{{ room.reservation }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Number</th>
+                            <td>{{ room.number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Type</th>
+                            <td>{{ room.type }}</td>
+                        </tr>
+                        <tr>
+                            <th>Price</th>
+                            <td>{{ room.price }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ room.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Picture</th>
+                            <td>{{ room.picture}}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>{{ room.status }}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                    <a href="{{ path('app_room_index') }}">back to list</a>
+
+                    <a href="{{ path('app_room_edit', {'id': room.id}) }}">edit</a>
+
+                    <form method="post" action="{{ path('app_room_delete', {'id': room.id}) }}" onsubmit="return confirm('Are you sure you want to delete this room?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ room.id) }}">
+                        <button class="btn">Delete</button>
+                    </form>
+                </div><!-- /.box-body -->
+
+            </div><!-- /.box -->
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Hello AdminController!
+{% endblock %}
+
+{% block body %}
+<div
+        class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+
+        <ol>
+            <a href="">
+                <i class="fa fa-dashboard"></i>
+                Home</a>
+        </ol>
+    </section>
+
+                    <h1>Admin index</h1>
+
+                    <table class="table">
+                        <tr>
+                            <th>Id</th>
+                            <th>Reservation_Id</th>
+                            <th>Number</th>
+                            <th>Type</th>
+                            <th>Price</th>
+                            <th>Description</th>
+                            <th>Picture</th>
+                            <th>Status</th>
+                        </tr>
+                        {% for room in rooms %}
+                            <tr>
+                                <td>{{ room.id }}</td>
+                                <td>{{ room.reservation }}</td>
+                                <td>{{ room.number }}</td>
+                                <td>{{ room.type }}</td>
+                                <td>{{ room.price }}</td>
+                                <td>{{ room.description}}</td>
+                                <td>{{ room.picture }}</td>
+                                <td>{{ room.status }}</td>
+
+                                <td>
+                                    <a href="{{ path('app_room_show', {'id': room.id}) }}">show</a>
+                                    <a href="{{ path('app_room_edit', {'id': room.id}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="11">no records found</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+                    <a href="{{ path('app_room_new') }}">Create new</a>
+                </div><!-- /.box-body -->
+
+
+{% endblock %}

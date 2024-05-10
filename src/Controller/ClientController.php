@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Reservation;
 use App\Entity\Client;
 use App\Form\ClientType;
 use App\Service\PdfService;
@@ -13,40 +14,35 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ClientController extends AbstractController
 {
-    #[Route('/client', name: 'app_client')]
-    public function addClient(ManagerRegistry $doctrine, Request $request , PdfService $pdf ): Response
+    private $doctrine;
+
+    public function __construct(ManagerRegistry $doctrine)
     {
-       $client = new Client();
-        // Get client by id
-       /* $client = $doctrine->getRepository(Client::class)->find($id);
+        $this->doctrine = $doctrine;
+    }
 
-        if (!$client) {
-            throw $this->createNotFoundException('The client does not exist');
-        }*/
-
+    #[Route('/client/{id}', name: 'app-client/{id}')]
+    public function addClient(Request $request, PdfService $pdf, Reservation $reservation): Response
+    {
+        $client = new Client();
         $form = $this->createForm(ClientType::class, $client);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // Get the entity manager
-            $entityManager = $doctrine->getManager();
+            $entityManager = $this->doctrine->getManager();
 
             // Persist the client data to the database
             $entityManager->persist($client);
             $entityManager->flush();
 
-            // Add flash message
-            $this->addFlash('success', 'Client added successfully!');
-            $pdf ->showPdfFile('pdf/index.html.twig');
+            // Redirect to PDF generation with client ID
+            return $this->redirectToRoute('generate-pdf', ['id' => $client->getId(), 'id2' => $reservation->getId()]);
 
-
-            return $this->render('client/add-client.html.twig', [
-                'form' => $form->createView(),
-            ]);
         }
+
         return $this->render('client/add-client.html.twig', [
             'form' => $form->createView(),
         ]);
-
     }
 }

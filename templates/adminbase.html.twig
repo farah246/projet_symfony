@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Admin Dashboard</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <!-- Bootstrap 3.3.2 -->
+        <link href="{{ asset('admin/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body class="skin-blue">
+        {% block header %}{% include('admin/header.html.twig') %}{% endblock %}
+        {% block sidebar %}{% include('admin/sidebar.html.twig') %}{% endblock %}
+        {% block body %}{% endblock %}
+
+    </body>
+</html>

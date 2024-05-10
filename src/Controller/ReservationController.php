@@ -35,7 +35,7 @@ class ReservationController extends AbstractController
             $entityManager->persist($reservation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_reservation');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('home/index.html.twig', [

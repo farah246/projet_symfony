@@ -2,27 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
 use App\Service\PdfService;
+use App\Entity\Reservation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PdfController extends AbstractController
 {
-    #[Route('/pdf', name: 'app_pdf')]
-    public function index(): Response
+    #[Route('/generate-pdf/{id}/{id2}', name: 'generate-pdf')]
+    public function generatePdf(PdfService $pdfService, Client $client, Reservation $reservation): Response
     {
-        return $this->render('pdf/index.html.twig', [
-            'controller_name' => 'PdfController',
-        ]);
-    }
-    #[Route('/generate-pdf', name: 'generate-pdf')]
-
-    public function generatePdf(PdfService $pdfService ): Response
-    {
-        //  HTML content
-        $html = $this->render('pdf/index.html.twig', [
-            'controller_name' => 'PdfController',
+        // HTML content
+        $html = $this->renderView('pdf/client_pdf_template.html.twig', [
+            'client' => $client,
+            'reservation' => $reservation
         ]);
 
         // Generate PDF
@@ -31,7 +26,7 @@ class PdfController extends AbstractController
         // Output PDF to the browser
         return new Response($pdfContent, 200, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="Facture.pdf"',
+            'Content-Disposition' => 'inline; filename="Client_Information.pdf"',
         ]);
     }
 }
