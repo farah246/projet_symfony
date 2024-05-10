@@ -1,21 +1,49 @@
-{% extends 'base.html.twig' %}
+{# templates/pdf/client_pdf_template.html.twig #}
 
-{% block title %}Hello PdfController!{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Client Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333333;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #dddddd;
+        }
+    </style>
+</head>
+<body>
+<h1>Client Information</h1>
+<table>
+    <tr>
+        <th>Firstname</th>
+        <td>{{ client.firstname }}</td>
+    </tr>
+    <tr>
+        <th>Lastname</th>
+        <td>{{ client.lastname }}</td>
+    </tr>
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Helloooooooooooooooooo {{ controller_name }}! ✅</h1>
-()
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/symfony projects/projet_symfony/src/Controller/PdfController.php</code></li>
-        <li>Your template at <code>C:/symfony projects/projet_symfony/templates/pdf/index.html.twig</code></li>
-    </ul>
-</div>
-{% endblock %}
-
+    <tr>
+        <th>Arrival Date</th>
+        <td>{{ client.reservation.arrival_date|date('Y-m-d') }}</td>
+    </tr>
+    <tr>
+        <th>Total Price</th>
+        <td>{{ client.reservation.total_price }}</td>
+    </tr>
+</table>
+</body>
+</html>

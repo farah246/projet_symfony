@@ -16,10 +16,9 @@ class PdfController extends AbstractController
             'controller_name' => 'PdfController',
         ]);
     }
-    /**
-     * @Route("/generate-pdf", name="generate_pdf")
-     */
-    public function generatePdf(PdfService $pdfService): Response
+    #[Route('/generate-pdf', name: 'generate-pdf')]
+
+    public function generatePdf(PdfService $pdfService ): Response
     {
         //  HTML content
         $html = $this->render('pdf/index.html.twig', [

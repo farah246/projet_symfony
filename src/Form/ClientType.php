@@ -19,18 +19,17 @@ class ClientType extends AbstractType
             ->add('lastname')
             ->add('email')
             ->add('phone')
-            ->add('reservation', EntityType::class, [
-                'class' => Reservation::class,
-'choice_label' => 'id',
-            ])
-            ->add( 'payer',SubmitType::class)
-        ;
+            ->add('payer', SubmitType::class, [
+                'label' => 'Pay',
+                'attr' => ['class' => 'btn btn-primary', 'formaction' => $options['generate-pdf']]
+            ]);        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Client::class,
+            'generate-pdf' => ''
         ]);
     }
 }
