@@ -31,7 +31,8 @@ class ClientController extends AbstractController
             $this->addFlash('success', 'Client added successfully!');
 
             // Redirect to the client list page
-            return $this->redirectToRoute('app_client');
+           // return $this->redirectToRoute('app_client');
+           //pdfing 
         }
 
         return $this->render('client/add-client.html.twig', [
