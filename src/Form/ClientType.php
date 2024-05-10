@@ -19,11 +19,11 @@ class ClientType extends AbstractType
             ->add('lastname')
             ->add('email')
             ->add('phone')
-            ->add('reservation', EntityType::class, [
+           /* ->add('reservation', EntityType::class, [
                 'class' => Reservation::class,
 'choice_label' => 'id',
             ])
-            ->add( 'payer',SubmitType::class)
+            ->add( 'payer',SubmitType::class)*/
         ;
     }
 
