@@ -34,18 +34,25 @@ class Reservation
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $nb_nights = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable : true)]
     private ?float $total_price = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable : true)]
     private ?bool $status = null;
 
     #[ORM\OneToOne(inversedBy: 'reservation', cascade: ['persist', 'remove'])]
     private ?Facture $facture = null;
 
+    /**
+     * @var Collection<int, Service>
+     */
+    #[ORM\ManyToMany(targetEntity: Service::class)]
+    private Collection $services;
+
     public function __construct()
     {
         $this->rooms = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -163,6 +170,30 @@ class Reservation
     public function setFacture(?Facture $facture): static
     {
         $this->facture = $facture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): static
+    {
+        if (!$this->services->contains($service)) {
+            $this->services->add($service);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): static
+    {
+        $this->services->removeElement($service);
 
         return $this;
     }

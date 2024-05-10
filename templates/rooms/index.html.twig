@@ -1,11 +1,9 @@
 {% extends'base.html.twig' %}
-
 {% block body %}
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
-
     <!-- Offcanvas Menu Section Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="canvas-open">
@@ -31,6 +29,7 @@
             </div>
             <a href="#" class="bk-btn">Booking Now</a>
         </div>
+
         <nav class="mainmenu mobile-menu">
             <ul>
                 <li class="active"><a href="./index.html">Home</a></li>
@@ -350,6 +349,46 @@
         </div>
     </section>
     <!-- Rooms Section End -->
+    <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
+        <div class="booking-form">
+            <h3>Booking Your Hotel</h3>
+            {{ form_start(form, {'attr': {'class': 'form'}}) }}
+            <div class="form-group">
+                {{ form_label(form.arrival_date, 'Check In:', {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.arrival_date, {'attr': {'class': 'form-control date-input'}}) }}
+                <i class="icon_calendar"></i>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.departure_date, 'Check Out:', {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.departure_date, {'attr': {'class': 'form-control date-input'}}) }}
+                <i class="icon_calendar"></i>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.nb_nights, 'Number of nights:', {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.nb_nights, {'attr': {'class': 'form-control', 'placeholder': 'Add number of nights'}}) }}
+            </div>
+            <div class="form-group">
+                <label class="control-label">Rooms:</label>
+                {% for room in form.rooms %}
+                    <div class="form-check">
+                        {{ form_widget(room) }}
+                        {{ form_label(room) }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label class="control-label">Services:</label>
+                {% for service in form.services %}
+                    <div class="form-check">
+                        {{ form_widget(service) }}
+                        {{ form_label(service) }}
+                    </div>
+                {% endfor %}
+            </div>
+            {{ form_widget(form.editer, {'label': 'Réserver', 'attr': {'class': 'btn btn-primary'}}) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">
